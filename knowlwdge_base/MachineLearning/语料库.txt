@@ -1,0 +1,144 @@
+线性回归
+"模型类型": "回归",
+"描述": "通过线性组合特征预测连续值，最小化均方误差。",
+"输入": "数值型特征",
+"输出": "连续值",
+"数学公式": "y = β₀ + β₁x₁ + ... + βₙxₙ",
+"优点": "计算效率高，可解释性强",
+"缺点": "无法拟合非线性关系",
+"应用场景": ["房价预测", "销售额趋势分析"],
+"代码示例": "from sklearn.linear_model import LinearRegression\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)",
+"相关模型": ["岭回归", "Lasso回归"],
+"参考文献": "https://scikit-learn.org/stable/modules/linear_model.html"
+
+
+随机森林
+"模型类型": "分类/回归",
+"描述": "集成学习算法，通过多棵决策树投票提高泛化能力。",
+"输入": "数值/类别型特征",
+"输出": "类别或连续值",
+"数学公式": "多数投票（分类）或均值（回归）",
+"优点": "抗过拟合，处理高维数据",
+"缺点": "计算成本较高",
+"应用场景": ["信用卡欺诈检测", "医疗诊断"],
+"代码示例": "from sklearn.ensemble import RandomForestClassifier\nmodel = RandomForestClassifier(n_estimators=100)\nmodel.fit(X_train, y_train)",
+"相关模型": ["XGBoost", "梯度提升"],
+"参考文献": "https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html"
+
+
+卷积神经网络 (CNN)
+"模型类型": "深度学习",
+"描述": "通过卷积核提取空间特征，适用于图像和序列数据。",
+"输入": "图像/时序数据",
+"输出": "类别/分割图",
+"数学公式": "卷积运算：S(i,j) = (I*K)(i,j) = ∑∑ I(m,n)K(i−m,j−n)",
+"优点": "自动特征提取，平移不变性",
+"缺点": "需要大量训练数据",
+"应用场景": ["图像分类", "目标检测"],
+"代码示例": "import tensorflow as tf\nmodel = tf.keras.Sequential([\n  tf.keras.layers.Conv2D(32, (3,3), activation='relu', input_shape=(28,28,1)),\n  tf.keras.layers.MaxPooling2D((2,2))])",
+"相关模型": ["ResNet", "视觉Transformer"],
+"参考文献": "https://www.tensorflow.org/tutorials/images/cnn"
+
+
+支持向量机 (SVM)
+模型类型: "分类/回归"
+描述: "通过寻找最优超平面最大化类别间隔，适用于线性和非线性可分数据。"
+输入: "数值型特征"
+输出: "类别或连续值（支持向量回归）"
+数学公式: "超平面方程：𝐰·𝐱 + 𝑏 = 0，优化目标：min ‖𝐰‖² + C∑ξᵢ"
+优点: "在高维空间表现优秀，核技巧可处理非线性问题"
+缺点: "计算复杂度高，不适用于超大数据集"
+应用场景: ["文本分类", "生物信息学基因分类"]
+代码示例:
+from sklearn.svm import SVC
+model = SVC(kernel='rbf')
+model.fit(X_train, y_train)
+相关模型: ["核方法", "SVR（支持向量回归）"]
+参考文献: "https://scikit-learn.org/stable/modules/svm.html"
+
+
+K-近邻 (KNN)
+模型类型: "分类/回归"
+描述: "基于特征空间中的最近邻样本进行预测，属于懒惰学习算法。"
+输入: "数值/类别型特征（需标准化）"
+输出: "类别（多数投票）或连续值（均值）"
+数学公式: "距离度量（如欧氏距离）：𝑑(𝐱,𝐲) = √∑(𝑥ᵢ−𝑦ᵢ)²"
+优点: "简单易实现，无需训练阶段"
+缺点: "预测速度慢，对噪声敏感"
+应用场景: ["推荐系统", "异常检测"]
+代码示例:
+from sklearn.neighbors import KNeighborsClassifier
+model = KNeighborsClassifier(n_neighbors=5)
+model.fit(X_train, y_train)
+相关模型: ["半径近邻", "KD树优化"]
+参考文献: "https://scikit-learn.org/stable/modules/neighbors.html"
+
+
+梯度提升树 (GBDT)
+模型类型: "分类/回归"
+描述: "通过迭代训练弱学习器（决策树）并优化残差，逐步降低预测误差。"
+输入: "数值/类别型特征"
+输出: "类别或连续值"
+数学公式: "加法模型：𝐹ₘ(𝐱) = 𝐹ₘ₋₁(𝐱) + 𝜈·ℎₘ(𝐱)，其中𝜈为学习率"
+优点: "预测精度高，特征重要性可解释"
+缺点: "训练时间长，需调参防止过拟合"
+应用场景: ["点击率预测", "金融风险评估"]
+代码示例:
+from sklearn.ensemble import GradientBoostingClassifier
+model = GradientBoostingClassifier(n_estimators=100)
+model.fit(X_train, y_train)
+相关模型: ["XGBoost", "LightGBM", "CatBoost"]
+参考文献: "https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html"
+
+
+逻辑回归 (Logistic Regression)
+模型类型: "分类"
+描述: "通过Sigmoid函数将线性回归结果映射到[0,1]区间，用于二分类或多分类任务。"
+输入: "数值型特征"
+输出: "类别概率"
+数学公式: "Sigmoid函数：𝜎(𝑧) = 1 / (1 + 𝑒⁻�)，其中𝑧 = 𝐰·𝐱 + 𝑏"
+优点: "计算高效，可输出概率解释性强"
+缺点: "无法直接处理非线性可分数据"
+应用场景: ["垃圾邮件检测", "客户流失预测"]
+代码示例：
+from sklearn.linear_model import LogisticRegression
+model = LogisticRegression()
+model.fit(X_train, y_train)
+相关模型: ["Softmax回归（多分类）", "正则化逻辑回归"]
+参考文献: "https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html"
+
+
+主成分分析 (PCA)
+模型类型: "降维/特征提取"
+描述: "通过正交变换将高维数据投影到低维空间，保留最大方差方向。"
+输入: "数值型特征（需标准化）"
+输出: "降维后的特征"
+数学公式: "特征分解：𝐗ᵀ𝐗 = 𝐕𝚲𝐕ᵀ，投影矩阵取前𝑘个特征向量"
+优点: "减少数据维度，去除噪声和冗余"
+缺点: "丢失部分可解释性，线性假设限制"
+应用场景: ["数据可视化", "特征预处理"]
+代码示例:
+from sklearn.decomposition import PCA
+pca = PCA(n_components=2)
+X_reduced = pca.fit_transform(X)
+相关模型: ["t-SNE", "LDA（线性判别分析）"]
+参考文献: "https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html"
+
+
+长短期记忆网络 (LSTM)
+模型类型: "深度学习（时序模型）"
+描述: "通过门控机制解决RNN的长期依赖问题，适用于序列数据建模。"
+输入: "时序数据（如文本、传感器数据）"
+输出: "序列预测/分类结果"
+数学公式: "遗忘门：𝑓ₜ = 𝜎(𝐖_f·[ℎₜ₋₁, 𝑥ₜ] + 𝐛_f)，类似定义输入门和输出门"
+优点: "捕捉长期依赖，避免梯度消失"
+缺点: "计算资源消耗大"
+应用场景: ["股票价格预测", "机器翻译"]
+代码示例:
+from tensorflow.keras.layers import LSTM
+model = tf.keras.Sequential([
+    LSTM(64, input_shape=(100, 10)),  # 输入：100时间步，每步10维特征
+    tf.keras.layers.Dense(1)
+])
+相关模型: ["GRU", "Transformer"]
+参考文献: "https://www.tensorflow.org/guide/keras/rnn"
